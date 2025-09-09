@@ -64,7 +64,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Call Us',
-      detail: '+1 (555) 123-4567',
+      detail: '+94 (077) 194-5267',
       description: 'Mon-Fri from 8am to 5pm',
     },
     {
@@ -243,16 +243,31 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Map Placeholder */}
-            <div className="glass-card rounded-xl p-6">
-              <h3 className="font-semibold text-foreground mb-4">Our Location</h3>
-              <div className="w-full h-48 bg-background-secondary rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-muted-foreground text-sm">Interactive map coming soon</p>
-                </div>
-              </div>
-            </div>
+            
+            <div className="glass-card rounded-xl p-6 relative">
+                <h3 className="font-semibold text-foreground mb-4">Our Location</h3>
+                <div className="w-full h-48 md:h-80 rounded-lg overflow-hidden relative">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63256.38444690455!2d81.63729478177744!3d7.734104024682055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afacd5a8d4e794b%3A0x445b48547815a564!2sBatticaloa!5e0!3m2!1sen!2slk!4v1757412958212!5m2!1sen!2slk"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+
+                        {/* Floating button overlay */}
+                        <a
+                          href="https://goo.gl/maps/uCN3D2cAhfrZPw3K9"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="absolute bottom-3 right-3 bg-primary text-white text-xs px-3 py-2 rounded-lg shadow-lg hover:bg-primary/90 transition"
+                        >
+                          View on Google Maps
+                        </a>
+                      </div>
+                    </div>
 
             {/* Benefits */}
             <div className="glass-card rounded-xl p-6">
