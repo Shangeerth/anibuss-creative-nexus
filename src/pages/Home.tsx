@@ -72,79 +72,77 @@ const Home = () => {
     },
   ];
 
+  // Parallax state
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [parallax, setParallax] = React.useState({ x: 0, y: 0 });
+
+  // Mouse move parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 40; // -20 to 20
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 40;
+      setParallax({ x, y });
+    };
+    const hero = heroRef.current;
+    if (hero) {
+      hero.addEventListener('mousemove', handleMouseMove);
+    }
+    return () => {
+      if (hero) hero.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-        className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        ref={heroRef}
+        className="relative min-h-screen flex items-center justify-center bg-no-repeat overflow-hidden"
       >
-        {/* Unique Overlay with Location Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/70 to-primary/20 backdrop-blur-sm"></div>
-        
-        {/* Location Badge */}
-        <div className="absolute top-8 left-8 glass-card px-6 py-3 rounded-full animate-fade-up">
-          <div className="flex items-center gap-3">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium">Based in Sri Lanka 🇱🇰</span>
-          </div>
-        </div>
-        
-        {/* Digital Matrix Rain Effect */}
-        <div className="absolute inset-0 overflow-hidden opacity-20">
-          <div className="absolute top-0 left-0 w-full h-full">
-            {Array.from({ length: 50 }, (_, i) => (
-              <div
-                key={i}
-                className="absolute w-px bg-gradient-to-b from-primary via-secondary to-transparent animate-pulse"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  height: `${Math.random() * 300 + 100}px`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${Math.random() * 2 + 2}s`
-                }}
-              />
-            ))}
-          </div>
-        </div>
-        
-        {/* Floating Tech Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-4 h-4 border-2 border-primary/30 rounded-full animate-ping"></div>
-          <div className="absolute top-40 right-20 w-6 h-6 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg animate-pulse rotate-45"></div>
-          <div className="absolute bottom-40 left-20 w-2 h-2 bg-accent/50 rounded-full animate-bounce"></div>
-          <div className="absolute top-60 left-1/3 w-8 h-1 bg-gradient-to-r from-primary/30 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-60 right-1/3 w-3 h-3 border border-secondary/30 rotate-12 animate-pulse" style={{animationDelay: '2s'}}></div>
+        {/* Blurry Background Image */}
+        <div
+          className="absolute inset-0 w-full h-full z-0"
+          style={{
+            backgroundImage: `url(${heroImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            filter: 'blur(16px) brightness(0.7)',
+            opacity: 0.9,
+          }}
+        ></div>
+        {/* Animated Gradient Overlay */}
+        <div className="absolute inset-0 z-0 animate-gradient-move" style={{
+          background: `linear-gradient(120deg, rgba(40,40,80,0.85) 0%, rgba(80,0,120,0.7) 50%, rgba(0,180,255,0.6) 100%)`,
+          mixBlendMode: 'overlay',
+        }}></div>
+
+        {/* Parallax floating shapes */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute w-32 h-32 rounded-full bg-gradient-to-br from-primary/40 to-secondary/40 blur-2xl opacity-40"
+            style={{
+              top: `calc(20% + ${parallax.y}px)`,
+              left: `calc(10% + ${parallax.x}px)`,
+              transition: 'top 0.2s, left 0.2s',
+            }}
+          ></div>
+          <div
+            className="absolute w-24 h-24 rounded-full bg-gradient-to-tr from-accent/40 to-primary/30 blur-xl opacity-30"
+            style={{
+              bottom: `calc(15% - ${parallax.y}px)`,
+              right: `calc(15% - ${parallax.x}px)`,
+              transition: 'bottom 0.2s, right 0.2s',
+            }}
+          ></div>
         </div>
 
-        {/* Holographic Interface Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-32 left-16 w-20 h-20 border-2 border-primary/30 rounded-lg backdrop-blur-sm bg-primary/5 animate-pulse">
-            <div className="w-full h-full rounded-lg border border-secondary/20 animate-spin-slow"></div>
-          </div>
-          <div className="absolute bottom-32 right-16 w-24 h-16 bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-md rounded-xl transform rotate-12 animate-pulse">
-            <div className="w-full h-full rounded-xl bg-gradient-to-tl from-accent/10 to-transparent"></div>
-          </div>
-          <div className="absolute top-1/2 left-8 w-32 h-2 bg-gradient-to-r from-transparent via-primary/40 to-transparent rounded-full animate-pulse"></div>
-          <div className="absolute top-1/3 right-8 w-2 h-32 bg-gradient-to-b from-transparent via-secondary/40 to-transparent rounded-full animate-pulse"></div>
-        </div>
-
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="w-full h-full" style={{
-            backgroundImage: `
-              linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px),
-              linear-gradient(180deg, hsl(var(--primary)) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}></div>
-        </div>
-
+        {/* Hero Content */}
         <div className="relative z-10 container mx-auto px-6 text-center">
           <div className="max-w-4xl mx-auto space-y-8">
-            {/* Glitch Effect Container */}
             <div className="relative">
-              <h1 className="text-5xl md:text-7xl font-poppins font-bold animate-fade-up relative">
+              <h1 className="text-5xl md:text-7xl font-poppins font-bold animate-fade-up relative text-white drop-shadow-xl">
                 <span className="relative inline-block">
                   <span className="gradient-text relative z-10">Got an idea?</span>
                   <span className="absolute inset-0 gradient-text opacity-30 animate-pulse"></span>
@@ -159,14 +157,12 @@ const Home = () => {
                 </span>
               </h1>
             </div>
-            
             <div className="relative">
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto animate-fade-up animate-delay-200 font-playfair italic relative z-10">
+              <p className="text-xl md:text-2xl text-white max-w-2xl mx-auto animate-fade-up animate-delay-200 font-playfair italic relative z-10 drop-shadow-lg">
                 We transform creative ideas into stunning digital experiences that captivate and convert.
               </p>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 blur-2xl animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 blur-2xl animate-pulse"></div>
             </div>
-            
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up animate-delay-400">
               <Link
                 to="/services"
@@ -176,7 +172,6 @@ const Home = () => {
                 <ArrowRight className="h-5 w-5 relative z-10 transition-transform group-hover:translate-x-1" />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-20 transition-opacity"></div>
               </Link>
-              
               <Link
                 to="/portfolio"
                 className="btn-ghost inline-flex items-center gap-2 px-8 py-4 rounded-xl text-lg relative group overflow-hidden"
@@ -185,27 +180,24 @@ const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
             </div>
-
-            {/* Tech Stack Indicator */}
             <div className="animate-fade-up animate-delay-600">
-              <div className="flex items-center justify-center gap-6 mt-8 opacity-60">
+              <div className="flex items-center justify-center gap-6 mt-8 opacity-80">
                 <div className="flex items-center gap-2 text-sm">
                   <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                  <span>React</span>
+                  <span className="text-white">React</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                  <span>AI-Powered</span>
+                  <span className="text-white">AI-Powered</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <div className="w-2 h-2 bg-accent rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-                  <span>Creative</span>
+                  <span className="text-white">Creative</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         {/* Enhanced Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="relative">

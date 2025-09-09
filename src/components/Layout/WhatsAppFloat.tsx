@@ -3,9 +3,9 @@ import { MessageCircle } from 'lucide-react';
 
 const WhatsAppFloat = () => {
   const handleWhatsAppClick = () => {
-    const phoneNumber = '94771945267'; // Sri Lanka WhatsApp number
+  const phoneNumber = '94771945267'; // Sri Lanka WhatsApp number
     const message = encodeURIComponent('Hi! I\'d like to know more about your creative services.');
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  window.open(`https://wa.me/${phoneNumber}`, '_blank');
   };
 
   return (
