@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Code, Heart, Palette, Music, Plus } from 'lucide-react';
-import heroImage from '../assets/hero-bg.jpg';
+import heroImage from '../assets/hero-bg-unique.jpg';
 import webDevImage from '../assets/web-dev-service.jpg';
 import customWebsiteImage from '../assets/custom-websites-service.jpg';
 import illustrationsImage from '../assets/illustrations-service.jpg';
@@ -79,24 +79,54 @@ const Home = () => {
         className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 bg-background/85 backdrop-blur-sm"></div>
+        {/* Unique Overlay with Location Elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/70 to-primary/20 backdrop-blur-sm"></div>
         
-        {/* Floating Particles */}
+        {/* Location Badge */}
+        <div className="absolute top-8 left-8 glass-card px-6 py-3 rounded-full animate-fade-up">
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium">Based in Sri Lanka 🇱🇰</span>
+          </div>
+        </div>
+        
+        {/* Digital Matrix Rain Effect */}
+        <div className="absolute inset-0 overflow-hidden opacity-20">
+          <div className="absolute top-0 left-0 w-full h-full">
+            {Array.from({ length: 50 }, (_, i) => (
+              <div
+                key={i}
+                className="absolute w-px bg-gradient-to-b from-primary via-secondary to-transparent animate-pulse"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  height: `${Math.random() * 300 + 100}px`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${Math.random() * 2 + 2}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
+        
+        {/* Floating Tech Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-2 h-2 bg-primary/30 rounded-full animate-ping"></div>
-          <div className="absolute top-40 right-20 w-3 h-3 bg-secondary/40 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-40 left-20 w-1 h-1 bg-accent/50 rounded-full animate-bounce"></div>
-          <div className="absolute top-60 left-1/3 w-2 h-2 bg-primary/20 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-60 right-1/3 w-1 h-1 bg-secondary/30 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-20 left-10 w-4 h-4 border-2 border-primary/30 rounded-full animate-ping"></div>
+          <div className="absolute top-40 right-20 w-6 h-6 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg animate-pulse rotate-45"></div>
+          <div className="absolute bottom-40 left-20 w-2 h-2 bg-accent/50 rounded-full animate-bounce"></div>
+          <div className="absolute top-60 left-1/3 w-8 h-1 bg-gradient-to-r from-primary/30 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-60 right-1/3 w-3 h-3 border border-secondary/30 rotate-12 animate-pulse" style={{animationDelay: '2s'}}></div>
         </div>
 
-        {/* Geometric Shapes */}
+        {/* Holographic Interface Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-32 left-16 w-20 h-20 border border-primary/20 rotate-45 animate-spin-slow"></div>
-          <div className="absolute bottom-32 right-16 w-16 h-16 bg-gradient-to-br from-primary/10 to-secondary/10 transform rotate-12 animate-pulse"></div>
-          <div className="absolute top-1/2 left-8 w-24 h-1 bg-gradient-to-r from-transparent via-accent/30 to-transparent animate-pulse"></div>
-          <div className="absolute top-1/3 right-8 w-1 h-24 bg-gradient-to-b from-transparent via-primary/30 to-transparent animate-pulse"></div>
+          <div className="absolute top-32 left-16 w-20 h-20 border-2 border-primary/30 rounded-lg backdrop-blur-sm bg-primary/5 animate-pulse">
+            <div className="w-full h-full rounded-lg border border-secondary/20 animate-spin-slow"></div>
+          </div>
+          <div className="absolute bottom-32 right-16 w-24 h-16 bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-md rounded-xl transform rotate-12 animate-pulse">
+            <div className="w-full h-full rounded-xl bg-gradient-to-tl from-accent/10 to-transparent"></div>
+          </div>
+          <div className="absolute top-1/2 left-8 w-32 h-2 bg-gradient-to-r from-transparent via-primary/40 to-transparent rounded-full animate-pulse"></div>
+          <div className="absolute top-1/3 right-8 w-2 h-32 bg-gradient-to-b from-transparent via-secondary/40 to-transparent rounded-full animate-pulse"></div>
         </div>
 
         {/* Grid Pattern Overlay */}
