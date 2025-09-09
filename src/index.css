@@ -210,6 +210,10 @@
   .animate-scale-in {
     animation: scale-in 0.4s ease-out forwards;
   }
+
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
   
   /* Stagger Delays */
   .animate-delay-100 { animation-delay: 100ms; }
