@@ -35,7 +35,7 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="w-10 h-10 gradient-brand rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">A</span>
+              <span className="text-white font-bold text-xl">AB</span>
             </div>
             <span className="gradient-text text-xl font-poppins font-bold">
               Anibuss
