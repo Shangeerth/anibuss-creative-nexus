@@ -20,10 +20,30 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    {
+      icon: Facebook,
+      href: '#',
+      label: 'Facebook',
+      hoverClass: 'hover:bg-[#1877F3] hover:text-white',
+    },
+    {
+      icon: Instagram,
+      href: '#',
+      label: 'Instagram',
+      hoverClass: 'hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:text-white',
+    },
+    {
+      icon: Twitter,
+      href: '#',
+      label: 'Twitter',
+      hoverClass: 'hover:bg-[#1DA1F2] hover:text-white',
+    },
+    {
+      icon: Linkedin,
+      href: '#',
+      label: 'LinkedIn',
+      hoverClass: 'hover:bg-[#0077B5] hover:text-white',
+    },
   ];
 
   return (
@@ -46,15 +66,18 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 glass-card rounded-lg flex items-center justify-center
-                           hover:gradient-brand hover:text-white transition-all duration-300 hover-lift"
-                >
-                  <social.icon className="h-4 w-4" />
-                </a>
+                <div key={social.label} className="relative group">
+                  <a
+                    href={social.href}
+                    aria-label={social.label}
+                    className={`w-10 h-10 glass-card rounded-lg flex items-center justify-center transition-all duration-300 hover-lift ${social.hoverClass}`}
+                  >
+                    <social.icon className="h-4 w-4" />
+                  </a>
+                  <span className="absolute left-1/2 -bottom-8 -translate-x-1/2 px-2 py-1 rounded bg-black text-white text-xs opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 whitespace-nowrap">
+                    {social.label}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
@@ -101,19 +124,19 @@ const Footer = () => {
                 <div className="w-8 h-8 glass-card rounded-lg flex items-center justify-center">
                   <Mail className="h-4 w-4 text-secondary" />
                 </div>
-                <span className="text-muted-foreground text-sm">hello@anibuss.com</span>
+                <span className="text-muted-foreground text-sm">info@anibuss.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 glass-card rounded-lg flex items-center justify-center">
                   <Phone className="h-4 w-4 text-secondary" />
                 </div>
-                <span className="text-muted-foreground text-sm">+1 (555) 123-4567</span>
+                <span className="text-muted-foreground text-sm">+94 (077) 194-5267</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 glass-card rounded-lg flex items-center justify-center">
                   <MapPin className="h-4 w-4 text-secondary" />
                 </div>
-                <span className="text-muted-foreground text-sm">Digital Studio, Creative District</span>
+                <span className="text-muted-foreground text-sm">Batticaloa, SriLanka</span>
               </div>
             </div>
           </div>
@@ -122,7 +145,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-border/30 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 Anibuss. All rights reserved.
+            © 2025 Anibuss. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="text-muted-foreground hover:text-secondary text-sm transition-colors">
